@@ -34,7 +34,7 @@ h_{k+1} = h_k + α · Φ_θ(x, h_k) # Shared-weight refinement: iterative correc
 
 A progressive spectral loss targets high-frequency residuals across refinement steps. A fixed-point regularizer `L_fp = ||Φ_θ(x, y)||²` minimizes the bias at the true solution, directly tightening the convergence bound.
 
-![IRNO Pipeline](assests/img/flow_chart.png)
+![IRNO Pipeline](static/img/flow_chart.png)
 
 ---
 
@@ -59,6 +59,9 @@ ERA5 16× comparison against spectral state-of-the-art (IRNO uses WDSR as base):
 
 Error decreases monotonically across steps and remains stable well beyond the training cutoff K (dashed line), confirming contraction dynamics.
 
+## Spectral Dynamics
+![IRNO Pipeline](static/img/average_spectral_error.png)
+![IRNO Pipeline](static/img/per_sample.png)
 ---
 
 ## Installation
