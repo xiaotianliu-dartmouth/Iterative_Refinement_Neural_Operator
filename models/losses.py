@@ -32,14 +32,13 @@ def spectral_loss(pred, target, lambda_k=1.5):
     """
     H, W = pred.shape[-2], pred.shape[-1]
 
-    # Compute FFT
-    pred_fft = torch.fft.rfft2(pred, dim=(-2, -1))
-    target_fft = torch.fft.rfft2(target, dim=(-2, -1))
+    pred_fft = torch.fft.rfft2(pred, norm="ortho", dim=(-2, -1))
+    target_fft = torch.fft.rfft2(target, norm="ortho", dim=(-2, -1))
 
     pred_amp = torch.abs(pred_fft)
     target_amp = torch.abs(target_fft)
 
-    # Compute radial frequency weights
+    # Radial frequency grid for ρ(ω, λ_k) = 1 + (|ω|/|ω|_nyq)^λ_k
     freq_h = torch.fft.fftfreq(H, d=1.0).to(pred.device)
     freq_w = torch.fft.rfftfreq(W, d=1.0).to(pred.device)
 
@@ -50,19 +49,10 @@ def spectral_loss(pred, target, lambda_k=1.5):
     nyquist = 0.5
     relative_freq = radial_freq / nyquist
 
-    # ρ(ω, λ_k) = 1 + (|ω|/|ω|_nyq)^λ_k
     weights = (1.0 + relative_freq**lambda_k).unsqueeze(0).unsqueeze(0)
-
-    # Normalize by mean weight
     weights = weights / weights.mean()
-
-    # Weighted amplitude MSE
-    loss = torch.mean(weights * (pred_amp - target_amp)**2)
-
-    # Extra /HW compensates for PyTorch's unnormalized FFT (coefficients scale as √(HW)·σ)
-    loss = loss / (H * W)
-
-    return loss
+  
+    return torch.mean(weights * (pred_amp - target_amp)**2)
 
 
 def progressive_spectral_loss(pred, target, step, K, lambda_start=1.0, lambda_end=2.0):
