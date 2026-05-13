@@ -291,7 +291,7 @@ def train(config_path):
         base_channels=ref_cfg['base_channels'],
         depth=ref_cfg['depth'],
         padding_type=ref_cfg['padding_type'],
-        norm_type=ref_cfg.get('norm_type', 'batch'),
+        norm_type=ref_cfg.get('norm_type', 'layer'),
         num_groups=ref_cfg.get('num_groups', 8),
     )
 
