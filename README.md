@@ -72,6 +72,7 @@ Error decreases monotonically across steps and remains stable well beyond the tr
   </tr>
 </table>
 IRNO consistently attenuates mid-to-high frequency error across refinement steps, remaining stable beyond the training cutoff K.
+
 ---
 
 ## Installation
