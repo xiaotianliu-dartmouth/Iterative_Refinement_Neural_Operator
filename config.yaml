@@ -1,0 +1,69 @@
+# IRNO Configuration
+# Iterative Refinement Neural Operator
+
+gpu:
+  ids: "0"
+  use_multi_gpu: false
+
+model:
+  base:
+    pretrained_name: "polymathic-ai/FNO-active_matter"
+
+  refinement:
+    base_channels: 16
+    depth: 4
+    padding_type: "circular"
+    norm_type: "layer"      # "batch" | "layer" | "group"
+    num_groups: 8           # only used when norm_type is "group"
+
+training:
+  num_epochs: 150
+  batch_size: 16
+  learning_rate: 3e-4
+  weight_decay: 1e-5
+  grad_clip: 1.0
+
+  # IRNO parameters
+  K: 6              # Training horizon (refinement steps)
+  alpha: 0.2        # Step size
+
+  scheduler:
+    enabled: true
+    eta_min: 1e-6
+
+  spectral_loss:
+    enabled: true
+    weight: 1.0           # β_spectral
+    lambda_start: 1.0     # Progressive exponent start
+    lambda_end: 2.0       # Progressive exponent end
+    warmup_epochs: 0
+
+  fixed_point_reg:
+    enabled: true
+    weight: 0.01          # β_fp
+    warmup_epochs: 5
+
+dataset:
+  name: "active_matter"
+  base_path: "/path/to/dataset/active_matter/"
+  n_frames_input: 4
+  normalization: "zscore"
+
+  dataloader:
+    num_workers: 4
+    pin_memory: true
+
+validation:
+  loss_threshold: 100.0
+  max_outlier_pct: 5
+
+checkpoint:
+  dir: "./checkpoints"
+  save_best: true
+  save_final: true
+
+logging:
+  print_every: 10
+  verbose: true
+
+seed: 42

@@ -1,0 +1,8 @@
+torch>=2.0
+the-well
+neuralop
+huggingface_hub
+einops
+pyyaml
+numpy
+matplotlib
