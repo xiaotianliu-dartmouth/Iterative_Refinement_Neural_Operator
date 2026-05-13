@@ -60,8 +60,19 @@ ERA5 16× comparison against spectral state-of-the-art (IRNO uses WDSR as base):
 Error decreases monotonically across steps and remains stable well beyond the training cutoff K (dashed line), confirming contraction dynamics.
 
 ## Spectral Dynamics
-![IRNO Pipeline](static/img/average_spectral_error.png)
-![IRNO Pipeline](static/img/per_sample.png)
+
+<table>
+  <tr>
+    <td><img src="static/img/average_spectral_error.png" alt="Dataset-level median normalized spectral error ratios" width="400"/></td>
+    <td><img src="static/img/per_sample.png" alt="Instance-level spectral MSE trajectories" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center">(a) Median normalized spectral error ratios across the test set.</td>
+    <td align="center">(b) Instance-level spectral MSE for a representative test sample.</td>
+  </tr>
+</table>
+
+IRNO consistently attenuates mid-to-high frequency error across refinement steps, remaining stable beyond the training cutoff K.
 ---
 
 ## Installation
