@@ -9,7 +9,7 @@
 **ICML 2026 · Spotlight**
 
 [![Project Page](https://img.shields.io/badge/Project-Page-blue)](https://xiaotianliu-dartmouth.github.io/IRNO_ICML_26_Spotlight/)
-[![arXiv](https://img.shields.io/badge/arXiv-XXXX.XXXXX-red)](https://arxiv.org/abs/2605.24041)
+[![arXiv](https://img.shields.io/badge/arXiv-2605.24041-red)](https://arxiv.org/abs/2605.24041)
 [![Slides](https://img.shields.io/badge/Slides-PDF-orange)](https://xiaotianliu-dartmouth.github.io/IRNO_ICML_26_Spotlight/static/pdfs/IRNO_slides.pdf)
 
 ---
